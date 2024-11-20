@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 // Sample Testimonials Data (replace with actual testimonials)
 const TESTIMONIALS = [
   {
-    quote: "Their innovative approach to government technology solutions has transformed our operational efficiency. The team's expertise is unparalleled.",
+    quote: "Their innovative approach to government technology solutions has transformed our operational efficiency. The team&apos;s expertise is unparalleled.",
     author: "John Smith",
     position: "Director of Operations, City Government"
   },
@@ -14,7 +14,7 @@ const TESTIMONIALS = [
     position: "CIO, State Department"
   },
   {
-    quote: "The depth of expertise and commitment to solving complex challenges is truly remarkable. They don't just provide solutions; they become a strategic partner.",
+    quote: "The depth of expertise and commitment to solving complex challenges is truly remarkable. They don&apos;t just provide solutions; they become a strategic partner.",
     author: "Michael Chen",
     position: "Chief Technology Officer, Federal Agency"
   }
