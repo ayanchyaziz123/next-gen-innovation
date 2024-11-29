@@ -1,8 +1,15 @@
-import React from 'react';
-import { Mail, Linkedin, Award } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Linkedin, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Team members data (you can replace with actual data)
 const TEAM_MEMBERS = [
+  {
+    name: 'Mohammed Abdun Noor',
+    title: 'CEO',
+    image: 'noor sir.avif',
+    email: 'david.kim@company.com',
+    linkedin: 'https://linkedin.com/in/davidkim',
+    achievements: ['Operational Excellence Award', 'Efficiency Innovator']
+  },
   {
     name: 'Dr Santanu Das',
     title: 'CEO, Lead Project Manager',
@@ -10,14 +17,6 @@ const TEAM_MEMBERS = [
     email: 'santanu44@aol.com',
     linkedin: 'https://www.linkedin.com/in/dr-santanu-das-3917201b/',
     achievements: ['Tech Innovator Award', 'Government Leadership Excellence']
-  },
-  {
-    name: 'Ishtiak Ahmed',
-    title: 'Chief Technology Officer',
-    image: '/api/placeholder/300/400',
-    email: 'michael.chen@company.com',
-    linkedin: 'https://linkedin.com/in/michaelchen',
-    achievements: ['AI Innovation Leader', 'Digital Transformation Expert']
   },
   {
     name: 'Azizur Rahman',
@@ -28,95 +27,258 @@ const TEAM_MEMBERS = [
     achievements: ['Product Design Visionary', 'Emerging Tech Strategist']
   },
   {
-    name: 'David Kim',
-    title: 'Chief Operations Officer',
+    name: 'Ishtiak Ahmed',
+    title: 'Chief Technology Officer',
     image: '/api/placeholder/300/400',
-    email: 'david.kim@company.com',
-    linkedin: 'https://linkedin.com/in/davidkim',
-    achievements: ['Operational Excellence Award', 'Efficiency Innovator']
-  }
+    email: 'michael.chen@company.com',
+    linkedin: 'https://linkedin.com/in/michaelchen',
+    achievements: ['AI Innovation Leader', 'Digital Transformation Expert']
+  },
 ];
 
 const TeamSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [screenSize, setScreenSize] = useState('desktop');
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  // Enhanced Responsive Breakpoints
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) setScreenSize('mobile');
+      else if (width < 1024) setScreenSize('tablet');
+      else setScreenSize('desktop');
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getItemsPerView = () => {
+    switch (screenSize) {
+      case 'mobile': return 1;
+      case 'tablet': return 2;
+      default: return 3;
+    }
+  };
+
+  // Touch Handling with Improved Precision
+  const minSwipeDistance = 50;
+  const maxSwipeTime = 500; // ms
+  const [touchStartTime, setTouchStartTime] = useState(null);
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+    setTouchStartTime(Date.now());
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const touchDuration = Date.now() - touchStartTime;
+    const distance = touchStart - touchEnd;
+    const isQuickSwipe = touchDuration < maxSwipeTime;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if ((isLeftSwipe && isQuickSwipe) || (screenSize === 'mobile' && Math.abs(distance) > minSwipeDistance)) {
+      moveSlide('next');
+    }
+    if ((isRightSwipe && isQuickSwipe) || (screenSize === 'mobile' && Math.abs(distance) > minSwipeDistance)) {
+      moveSlide('prev');
+    }
+  };
+
+  const moveSlide = (direction) => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prev) => {
+        const itemsPerView = getItemsPerView();
+        const totalSlides = Math.ceil(TEAM_MEMBERS.length / itemsPerView);
+        const nextIndex = direction === 'next'
+          ? (prev + 1) % totalSlides
+          : (prev - 1 + totalSlides) % totalSlides;
+        return nextIndex;
+      });
+      setTimeout(() => setIsAnimating(false), 500);
+    }
+  };
+
+  const nextSlide = () => moveSlide('next');
+  const prevSlide = () => moveSlide('prev');
+
+  // Auto-slide with better mobile handling
+  useEffect(() => {
+    if (!isPaused && screenSize !== 'mobile') {
+      const interval = setInterval(nextSlide, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [isPaused, currentIndex, screenSize]);
+
   return (
-    <section id="team" className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-5xl font-extrabold bg-gradient-to-r from-cyan-600 to-indigo-700 text-transparent bg-clip-text leading-tight">
-            Leadership Team
+    <section 
+      id='team' 
+      className="py-4 sm:py-8 lg:py-16 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen flex flex-col justify-center"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Responsive Section Header with Improved Typography */}
+        <div className="text-center mb-6 sm:mb-8 lg:mb-16 space-y-2 sm:space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text leading-tight">
+            Meet Our Leadership Team
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             Pioneering experts who transform technological challenges into innovative government solutions
           </p>
         </div>
 
-        {/* Team Grid */}
-        <div className="grid md:grid-cols-4 gap-10">
-          {TEAM_MEMBERS.map((member, index) => (
-            <div 
-              key={index}
-              className="group relative transform transition-all duration-300 hover:-translate-y-2"
+        {/* Enhanced Carousel Container with Better Mobile Interaction */}
+        <div 
+          className="relative touch-pan-y"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          {/* Mobile-Friendly Navigation */}
+          <div className="flex justify-between absolute inset-y-0 items-center w-full z-10 px-2 sm:px-4">
+            <button
+              className="p-2 rounded-full bg-white/60 hover:bg-white/80 shadow-md sm:hidden"
+              onClick={prevSlide}
+              aria-label="Previous slide"
             >
-              {/* Card Container */}
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-transparent group-hover:border-cyan-500 transition-all">
-                {/* Member Image with Overlay */}
-                <div className="relative">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-96 object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            
+            <button
+              className="p-2 rounded-full bg-white/60 hover:bg-white/80 shadow-md sm:hidden ml-auto"
+              onClick={nextSlide}
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
 
-                {/* Member Info */}
-                <div className="p-6">
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-1">
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-gray-500 mb-4">
-                      {member.title}
-                    </p>
-                  </div>
+          {/* Desktop/Tablet Navigation */}
+          <button
+            className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-8 z-10 p-2 rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-300"
+            onClick={prevSlide}
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="h-5 w-5 lg:h-6 lg:w-6" />
+          </button>
+          
+          <button
+            className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-8 z-10 p-2 rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-300"
+            onClick={nextSlide}
+            aria-label="Next slide"
+          >
+            <ChevronRight className="h-5 w-5 lg:h-6 lg:w-6" />
+          </button>
 
-                  {/* Achievements */}
-                  {/* <div className="mb-4">
-                    {member.achievements.map((achievement, idx) => (
-                      <div 
-                        key={idx} 
-                        className="flex items-center text-sm text-gray-600 mb-2"
-                      >
-                        <Award className="w-4 h-4 mr-2 text-cyan-600" />
-                        <span>{achievement}</span>
+          {/* Carousel Slides Container */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ 
+                transform: `translateX(-${currentIndex * 100}%)`,
+              }}
+            >
+              {TEAM_MEMBERS.map((member, index) => (
+                <div 
+                  key={index} 
+                  className={`flex-shrink-0 px-2 sm:px-3 lg:px-4 ${
+                    screenSize === 'mobile' 
+                      ? 'w-full' 
+                      : screenSize === 'tablet' 
+                        ? 'w-1/2' 
+                        : 'w-1/3'
+                  }`}
+                >
+                  
+                  <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    {/* Responsive Image with Aspect Ratio Control */}
+                    <div className="relative aspect-w-3 aspect-h-4 overflow-hidden">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+
+                    {/* Content Container with Improved Typography */}
+                    <div className="p-4 sm:p-5 lg:p-6 text-center">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text mb-1">
+                        {member.name}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-600 font-medium mb-2">
+                        {member.title}
+                      </p>
+                      
+                      {/* Achievements with Responsive Display */}
+                      <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-3">
+                        {member.achievements.map((achievement, idx) => (
+                          <span
+                            key={idx}
+                            className="inline-flex items-center px-2.5 py-1 rounded-full text-xs bg-purple-50 text-purple-600"
+                          >
+                            <Award className="w-3 h-3 mr-1.5" />
+                            {achievement}
+                          </span>
+                        ))}
                       </div>
-                    ))}
-                  </div> */}
 
-                  {/* Contact Information */}
-                  <div className="flex justify-center space-x-4 mt-6">
-                    <a
-                      href={`mailto:${member.email}`}
-                      className="text-gray-500 hover:text-cyan-600 transition-colors p-2 bg-gray-100 rounded-full"
-                      title="Email"
-                    >
-                      <Mail className="w-6 h-6" />
-                    </a>
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-500 hover:text-cyan-600 transition-colors p-2 bg-gray-100 rounded-full"
-                      title="LinkedIn"
-                    >
-                      <Linkedin className="w-6 h-6" />
-                    </a>
+                      {/* Contact Links */}
+                      <div className="flex justify-center space-x-3">
+                        <a
+                          href={`mailto:${member.email}`}
+                          className="p-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-600 hover:text-purple-600 transition-all duration-300 transform hover:scale-110"
+                          aria-label="Send email"
+                        >
+                          <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                        </a>
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-gray-100 hover:bg-purple-100 text-gray-600 hover:text-purple-600 transition-all duration-300 transform hover:scale-110"
+                          aria-label="View LinkedIn profile"
+                        >
+                          <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Responsive Dot Navigation */}
+          <div className="flex justify-center space-x-2 mt-4 sm:mt-6">
+            {Array.from({ length: Math.ceil(TEAM_MEMBERS.length / getItemsPerView()) }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex 
+                    ? 'bg-purple-600 w-4' 
+                    : 'bg-gray-300 hover:bg-purple-300'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
