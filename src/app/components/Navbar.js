@@ -7,7 +7,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'services', 'team', 'contact'];
+      const sections = ['home', 'services', 'team', 'blog','contact'];
       const scrollPosition = window.scrollY + 100; // Offset for better accuracy
 
       for (const section of sections) {
@@ -32,6 +32,7 @@ export default function Navbar() {
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'team', label: 'Team' },
+    { id: 'blog', label: 'Blogs' },
   ];
 
   return (
@@ -41,7 +42,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <a href="#" className="flex-shrink-0">
               <span className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-indigo-500 text-transparent bg-clip-text">
-                NGI
+                Next Generation Innovation L.L.C.
               </span>
             </a>
           </div>

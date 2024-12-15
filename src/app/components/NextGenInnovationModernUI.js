@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import Navbar from './Navbar';
 import ServicesSection from './ServicesSection';
+import BlogSection from './Blogs';
 
 const TEAM_MEMBERS = [
   {
@@ -134,6 +135,7 @@ export default function NextGenInnovationModernUI() {
      
     {/* Testimonials Section */}
     <Testimonial/>
+    <BlogSection/>
    
 
       {/* Contact Section */}
@@ -142,7 +144,7 @@ export default function NextGenInnovationModernUI() {
           <div>
             <h2 className="text-4xl font-bold mb-6">Let's Connect</h2>
             <p className="text-xl mb-8">
-              Ready to transform your government IT infrastructure? 
+              Ready to transform your IT infrastructure? 
               Reach out to our expert team today.
             </p>
             <div className="space-y-4">

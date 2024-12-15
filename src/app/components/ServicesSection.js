@@ -55,6 +55,32 @@ const SERVICES = [
     }
   },
   {
+    icon: <Cloud className="w-8 h-8 text-cyan-600" />,
+    title: "Compliance and Security",
+    description: "Secure and scalable cloud computing for government agencies.",
+    details: {
+      overview: "Compliance with industry standards, particularly in areas such as data security and privacy.",
+      keyFeatures: [
+        "Hybrid and multi-cloud strategies",
+        "Secure cloud migration",
+        "Compliance-driven cloud architecture",
+        "Disaster recovery and backup solutions"
+      ],
+      benefits: [
+        "Cost-effective infrastructure",
+        "Scalable and flexible computing resources",
+        "Enhanced data accessibility",  
+        "Reduced IT management overhead"
+      ],
+      technologies: [
+        "Kubernetes Container Orchestration",
+        "FedRAMP Compliant Cloud Platforms",
+        "Advanced Cloud Security Tools",
+        "AI-Powered Cloud Optimization"
+      ]
+    }
+  },
+  {
     icon: <Shield className="w-8 h-8 text-cyan-600" />,
     title: "Cybersecurity",
     description: "Comprehensive digital protection and threat mitigation strategies.",
