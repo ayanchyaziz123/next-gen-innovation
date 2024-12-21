@@ -1,108 +1,160 @@
 import React, { useState } from 'react';
-import { ChevronRight, X, Network, Cloud, Shield, CheckCircle, ArrowRight } from 'lucide-react';
+import { ChevronRight, X, Network, Cloud, Shield, CheckCircle, ArrowRight, Cog, Building, Laptop } from 'lucide-react';
 
 const SERVICES = [
   {
     icon: <Network className="w-8 h-8 text-cyan-600" />,
-    title: "Network Infrastructure",
-    description: "Advanced networking solutions for robust public sector connectivity.",
+    title: "Public Safety & Emergency Systems",
+    description: "Mission-critical IT solutions for emergency management and public safety operations.",
     details: {
-      overview: "Our comprehensive network infrastructure services provide cutting-edge solutions designed to enhance governmental communication and data transfer capabilities.",
+      overview: "Specialized IT infrastructure and systems designed to support emergency services, public safety operations, and critical response systems for state and local government agencies.",
       keyFeatures: [
-        "End-to-end network design and implementation",
-        "Secure and scalable network architecture",
-        "Advanced threat detection and prevention",
-        "High-availability and redundancy solutions"
+        "Emergency response management systems",
+        "Real-time incident tracking and reporting",
+        "Integrated communication platforms",
+        "Mobile command center solutions"
+      ],
+      benefits: [
+        "Improved emergency response times",
+        "Enhanced coordination between agencies",
+        "Real-time situational awareness",
+        "Reliable 24/7 operation support"
+      ],
+      technologies: [
+        "Computer-Aided Dispatch (CAD)",
+        "Emergency Alert Systems",
+        "Mobile Data Terminals",
+        "Incident Management Software"
+      ]
+    }
+  },
+  {
+    icon: <Cloud className="w-8 h-8 text-cyan-600" />,
+    title: "Cloud & Digital Transformation",
+    description: "Secure cloud solutions and digital modernization for government agencies.",
+    details: {
+      overview: "Comprehensive digital transformation services that modernize government operations through secure cloud solutions, while ensuring compliance with all relevant regulations.",
+      keyFeatures: [
+        "FedRAMP-compliant cloud migration",
+        "Legacy system modernization",
+        "Digital workflow automation",
+        "Cloud-based disaster recovery"
       ],
       benefits: [
         "Improved operational efficiency",
-        "Enhanced data security and privacy",
-        "Seamless inter-agency communication",
-        "Reduced network downtime"
+        "Cost-effective scalability",
+        "Enhanced service delivery",
+        "Reduced maintenance overhead"
       ],
       technologies: [
-        "Software-Defined Networking (SDN)",
-        "Next-Generation Firewalls",
-        "Zero Trust Network Architecture",
-        "Advanced Encryption Protocols"
+        "Government Cloud Platforms",
+        "Containerization",
+        "Microservices Architecture",
+        "Automated DevSecOps"
       ]
     }
   },
   {
-    icon: <Cloud className="w-8 h-8 text-cyan-600" />,
-    title: "Cloud Solutions",
-    description: "Secure and scalable cloud computing for government agencies.",
+    icon: <Building className="w-8 h-8 text-cyan-600" />,
+    title: "Smart Infrastructure",
+    description: "Intelligent solutions for traffic and transportation management systems.",
     details: {
-      overview: "Transform your agency's digital landscape with our enterprise-grade cloud solutions tailored to meet the most stringent government compliance requirements.",
+      overview: "Advanced IT solutions for modern urban infrastructure, focusing on traffic management and transportation systems that enhance public service delivery.",
       keyFeatures: [
-        "Hybrid and multi-cloud strategies",
-        "Secure cloud migration",
-        "Compliance-driven cloud architecture",
-        "Disaster recovery and backup solutions"
+        "Intelligent traffic management",
+        "Smart transportation systems",
+        "Real-time monitoring solutions",
+        "Automated incident detection"
       ],
       benefits: [
-        "Cost-effective infrastructure",
-        "Scalable and flexible computing resources",
-        "Enhanced data accessibility",
-        "Reduced IT management overhead"
+        "Improved traffic flow",
+        "Enhanced public safety",
+        "Reduced congestion",
+        "Data-driven decision making"
       ],
       technologies: [
-        "Kubernetes Container Orchestration",
-        "FedRAMP Compliant Cloud Platforms",
-        "Advanced Cloud Security Tools",
-        "AI-Powered Cloud Optimization"
-      ]
-    }
-  },
-  {
-    icon: <Cloud className="w-8 h-8 text-cyan-600" />,
-    title: "Compliance and Security",
-    description: "Secure and scalable cloud computing for government agencies.",
-    details: {
-      overview: "Compliance with industry standards, particularly in areas such as data security and privacy.",
-      keyFeatures: [
-        "Hybrid and multi-cloud strategies",
-        "Secure cloud migration",
-        "Compliance-driven cloud architecture",
-        "Disaster recovery and backup solutions"
-      ],
-      benefits: [
-        "Cost-effective infrastructure",
-        "Scalable and flexible computing resources",
-        "Enhanced data accessibility",  
-        "Reduced IT management overhead"
-      ],
-      technologies: [
-        "Kubernetes Container Orchestration",
-        "FedRAMP Compliant Cloud Platforms",
-        "Advanced Cloud Security Tools",
-        "AI-Powered Cloud Optimization"
+        "IoT Sensors and Networks",
+        "AI-powered Analytics",
+        "Smart Traffic Controllers",
+        "Real-time Data Processing"
       ]
     }
   },
   {
     icon: <Shield className="w-8 h-8 text-cyan-600" />,
-    title: "Cybersecurity",
-    description: "Comprehensive digital protection and threat mitigation strategies.",
+    title: "Cybersecurity & Compliance",
+    description: "Comprehensive security solutions ensuring regulatory compliance.",
     details: {
-      overview: "Our cybersecurity services provide multi-layered defense mechanisms against evolving digital threats, ensuring the highest level of protection for critical government infrastructure.",
+      overview: "State-of-the-art cybersecurity services designed specifically for government agencies, ensuring both protection against threats and compliance with regulatory requirements.",
       keyFeatures: [
-        "Comprehensive threat intelligence",
-        "Proactive vulnerability assessment",
-        "Incident response and recovery",
-        "Continuous security monitoring"
+        "24/7 Security monitoring",
+        "Compliance management",
+        "Threat detection and response",
+        "Security awareness training"
       ],
       benefits: [
-        "Minimized security risks",
-        "Rapid threat detection and mitigation",
-        "Compliance with strict security standards",
-        "Protecting sensitive government data"
+        "Enhanced data protection",
+        "Regulatory compliance",
+        "Reduced security risks",
+        "Improved incident response"
       ],
       technologies: [
-        "Advanced Threat Detection AI",
-        "Quantum-Resistant Encryption",
-        "Behavioral Analytics",
-        "Zero Trust Security Framework"
+        "Zero Trust Architecture",
+        "AI-powered Threat Detection",
+        "Compliance Automation",
+        "Advanced Encryption"
+      ]
+    }
+  },
+  {
+    icon: <Cog className="w-8 h-8 text-cyan-600" />,
+    title: "Custom IT Solutions",
+    description: "Tailored OEM and custom IT solutions for specific agency needs.",
+    details: {
+      overview: "Specialized IT solutions designed and developed specifically for state and local government agencies in the Tri-State area, with local support and expertise.",
+      keyFeatures: [
+        "Custom software development",
+        "System integration services",
+        "Legacy system modernization",
+        "Local technical support"
+      ],
+      benefits: [
+        "Solutions matched to exact needs",
+        "Rapid local support response",
+        "Streamlined operations",
+        "Cost-effective maintenance"
+      ],
+      technologies: [
+        "Modern Development Frameworks",
+        "API Integration Tools",
+        "Custom Hardware Solutions",
+        "Automated Testing Systems"
+      ]
+    }
+  },
+  {
+    icon: <Laptop className="w-8 h-8 text-cyan-600" />,
+    title: "Managed IT Services",
+    description: "Comprehensive IT management and support services.",
+    details: {
+      overview: "Full-spectrum managed IT services providing reliable, continuous support for government agencies with a focus on maintaining operational excellence.",
+      keyFeatures: [
+        "24/7 IT support",
+        "Infrastructure management",
+        "Help desk services",
+        "System maintenance"
+      ],
+      benefits: [
+        "Reduced downtime",
+        "Predictable IT costs",
+        "Proactive maintenance",
+        "Local expert support"
+      ],
+      technologies: [
+        "Remote Monitoring Tools",
+        "Service Desk Systems",
+        "Automation Platforms",
+        "Asset Management Software"
       ]
     }
   }
@@ -116,10 +168,10 @@ const ServicesSection = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12 space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-600 to-indigo-600 text-transparent bg-clip-text">
-            Our Innovative Services
+            Innovative IT Solutions for Government
           </h2>
           <p className="text-base md:text-xl text-gray-600 max-w-2xl mx-auto">
-            Cutting-edge IT solutions designed to empower public sector excellence through advanced technological frameworks
+            Minority-owned, New York-based IT solutions provider delivering secure, compliant, and innovative technology services for state and local government agencies
           </p>
         </div>
 
@@ -130,17 +182,17 @@ const ServicesSection = () => {
               className="relative"
             >
               <div 
-                className="bg-white p-5 md:p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group border border-gray-100"
+                className="bg-white p-5 md:p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group border border-gray-100 h-full flex flex-col"
               >
                 <div className="mb-4 md:mb-6 p-3 md:p-4 bg-gray-100 rounded-full inline-block group-hover:bg-gradient-to-r group-hover:from-cyan-100 group-hover:to-indigo-100 transition-all duration-300">
                   {service.icon}
                 </div>
                 <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-4 text-gray-800">{service.title}</h3>
-                <p className="text-sm md:text-base text-gray-600 mb-3 md:mb-4">{service.description}</p>
+                <p className="text-sm md:text-base text-gray-600 mb-3 md:mb-4 flex-grow">{service.description}</p>
                 
                 <button 
                   onClick={() => setActiveService(activeService === index ? null : index)}
-                  className="text-cyan-600 flex items-center hover:text-indigo-600 transition-colors duration-300 text-sm md:text-base"
+                  className="text-cyan-600 flex items-center hover:text-indigo-600 transition-colors duration-300 text-sm md:text-base mt-auto"
                 >
                   Learn More <ChevronRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
                 </button>

@@ -7,8 +7,8 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'services', 'team', 'blog','contact'];
-      const scrollPosition = window.scrollY + 100; // Offset for better accuracy
+      const sections = ['home', 'services', 'team', 'blog', 'contact'];
+      const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -38,12 +38,25 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <a href="#" className="flex-shrink-0">
-              <span className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-indigo-500 text-transparent bg-clip-text">
-                Next Generation Innovation L.L.C.
-              </span>
+        <div className="flex items-center justify-between h-20">
+          <div className="flex items-center space-x-4">
+            <a href="#" className="flex items-center space-x-3">
+              <img
+                src="Next Generation Innovation LLC.png"
+                alt="Next Generation Innovation Logo"
+                className="h-10 w-10 rounded-lg"
+              />
+              <div className="flex flex-col">
+                <span className="text-lg font-bold bg-gradient-to-r from-cyan-500 to-indigo-500 text-transparent bg-clip-text leading-tight hidden sm:block">
+                  Next Generation
+                </span>
+                <span className="text-lg font-bold bg-gradient-to-r from-cyan-500 to-indigo-500 text-transparent bg-clip-text leading-tight hidden sm:block">
+                  Innovation L.L.C.
+                </span>
+                <span className="text-lg font-bold bg-gradient-to-r from-cyan-500 to-indigo-500 text-transparent bg-clip-text leading-tight sm:hidden">
+                  NGI L.L.C.
+                </span>
+              </div>
             </a>
           </div>
           
@@ -107,6 +120,7 @@ export default function Navbar() {
                     ? 'bg-gradient-to-r from-cyan-500/10 to-indigo-500/10 text-cyan-600'
                     : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
                   }`}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
               </a>
@@ -118,6 +132,7 @@ export default function Navbar() {
                   ? 'bg-gradient-to-r from-cyan-600 to-indigo-600 text-white'
                   : 'bg-gradient-to-r from-cyan-500 to-indigo-500 text-white'
                 }`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               Contact Us
             </a>

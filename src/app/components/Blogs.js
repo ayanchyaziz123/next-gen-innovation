@@ -4,7 +4,7 @@ import { Calendar, User, Tag, ChevronRight, X, ArrowRight } from 'lucide-react';
 const BLOG_POSTS = [
   {
     id: 1,
-    title: "Transforming Public Sector Technology",
+    title: "What is New in Minority and Women Owned Business Enterprise Landscape in New York?",
     author: "Azizur Rahman",
     date: "December 10, 2024",
     tags: ["Digital Transformation", "Government Tech"],
@@ -29,7 +29,7 @@ const BLOG_POSTS = [
   },
   {
     id: 2,
-    title: "Cybersecurity in the Digital Age",
+    title: "Innovation hotspots in New York",
     author: "Dr Santanu Das",
     date: "November 25, 2024",
     tags: ["Cybersecurity", "Risk Management"],
@@ -54,7 +54,7 @@ const BLOG_POSTS = [
   },
   {
     id: 3,
-    title: "Cloud Migration Strategies",
+    title: "Tech Employment In New York State and In New York City",
     author: "Azizur Rahman",
     date: "October 15, 2024",
     tags: ["Cloud Computing", "Digital Strategy"],
